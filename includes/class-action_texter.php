@@ -182,15 +182,15 @@ class Action_texter {
 
 		$antexter_methods = new ANTexterMethods();
 
-		$this->loader->add_action( 'wp_send_test_text', $antexter_methods, 'send_test_text' );
-		$this->loader->add_action( 'wp_fetch_forms', $antexter_methods, 'fetch_forms' );
-		$this->loader->add_action( 'wp_get_flows', $antexter_methods, 'get_flows' );
-		$this->loader->add_action( 'wp_post_flow', $antexter_methods, 'post_flow' );
-		$this->loader->add_action( 'wp_put_flow', $antexter_methods, 'put_flow' );
-		$this->loader->add_action( 'wp_send_bulk_text', $antexter_methods, 'send_bulk_text' );
-		$this->loader->add_action( 'wp_fetch_batches', $antexter_methods, 'fetch_batches' );
-		$this->loader->add_action( 'wp_fetch_tags', $antexter_methods, 'fetch_tags' );
-		$this->loader->add_action( 'wp_check_progress', $antexter_methods, 'check_progress' );
+		$this->loader->add_action( 'wp_ajax_send_test_text', $antexter_methods, 'send_test_text' );
+		$this->loader->add_action( 'wp_ajax_fetch_forms', $antexter_methods, 'fetch_forms' );
+		$this->loader->add_action( 'wp_ajax_get_flows', $antexter_methods, 'get_flows' );
+		$this->loader->add_action( 'wp_ajax_post_flow', $antexter_methods, 'post_flow' );
+		$this->loader->add_action( 'wp_ajax_put_flow', $antexter_methods, 'put_flow' );
+		$this->loader->add_action( 'wp_ajax_send_bulk_text', $antexter_methods, 'send_bulk_text' );
+		$this->loader->add_action( 'wp_ajax_fetch_batches', $antexter_methods, 'fetch_batches' );
+		$this->loader->add_action( 'wp_ajax_fetch_tags', $antexter_methods, 'fetch_tags' );
+		$this->loader->add_action( 'wp_ajax_check_progress', $antexter_methods, 'check_progress' );
 
 		$plugin_alert = new Plugin_Name_Alert();
 		$this->loader->add_action( 'init', $plugin_alert, 'my_alert_function' );
