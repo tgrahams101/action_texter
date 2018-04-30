@@ -193,7 +193,6 @@
   const total = 0;
   const ANAdress = "https://actionnetwork.org/api/v2/";
   const sendServer = ajaxurl;
-  const activeFlow = {};
   const ANForms = "https://actionnetwork.org/api/v2/forms";
   const theTagId = "";
   const flowBase =   {
@@ -257,7 +256,6 @@
     var resp = JSON.parse(this.responseText);
     var htmlStrings = [];
 
-
     for (var i = 0; i < resp.length; i++) {
         var dateObject = new Date(resp[i].finish);
         var momentObject = moment(dateObject);
@@ -274,9 +272,7 @@
 
     $("#newFlow_button").click(function() {
       currentFlow = flowBase;
-
       $('#form')[0].reset();
-
       $("#flow_form").toggle();
       $('#addNewField').on('click', function() {
         const currentStepLength = currentFlow.steps.length;
@@ -327,7 +323,6 @@
         input.oninput = function(event) {
           currentFlow.steps[newStepIndex].prompt = input.value;
         };
-
         p.onclick = function(event){
         }
         $('#requestDiv').append(p);
@@ -343,7 +338,6 @@
   }
 
   function displayFlows() {
-
     let flows = JSON.parse(this.response);
     let htmlArray = [];
     let activeCount = 0;
@@ -352,7 +346,6 @@
         activeFlowIndex = i;
         activeCount++;
       }
-
       let flowPElement = document.createElement('p');
       flowPElement.append(flows[i].title);
 
@@ -371,7 +364,6 @@
         if (activeFlowIndex !== null && activeFlowIndex !== i) {
           flows[activeFlowIndex].active = null;
           putFlow(flows[activeFlowIndex], true, true);
-
           activeFlowIndex = i;
           flows[i].active = true;
           putFlow(flows[i], true)
@@ -397,9 +389,7 @@
         $('#flow_form').toggle();
       }
 
-
       flowPElement.append(flowButtonElement);
-
       htmlArray.push(flowPElement);
     }
     $('#flow_list').html();
@@ -416,7 +406,6 @@
 
       for (let i = 0; i < formSelectOptions.length; i++) {
         if (formSelectOptions[i].value === currentFlow.foreignPath) {
-
           formSelectOptions[i].selected = 'selected';
         }
       }
@@ -483,7 +472,6 @@
       event.preventDefault();
       const formObject = event.target.elements;
 
-
       if (currentFlow.id) {
         putFlow(currentFlow);
       } else {
@@ -516,7 +504,6 @@
     $('#formSelect').on('change', function (event) {
       if (currentFlow) {
         currentFlow.foreignPath = this.value;
-
       }
     });
 
@@ -550,7 +537,6 @@
       option.text = currentFormObject.title;
       optionsList.push(option);
     }
-
     $('#formSelect').html();
     $('#formSelect').append(optionsList);
 
@@ -593,7 +579,6 @@
   }
 
   function postFlows(inputObject) {
-
     const xhttp = new XMLHttpRequest();
     xhttp.addEventListener("load", postFlowResponse);
     xhttp.open("POST", sendServer + "?action=post_flow", true);
@@ -607,8 +592,6 @@
   }
 
   function putFlow(inputObject, fromRadioCheck = false, updateOldActive = false) {
-
-
     const xhttp = new XMLHttpRequest();
     if (!updateOldActive) {
       xhttp.addEventListener("load", putFlowResponse.bind(xhttp, fromRadioCheck));
@@ -620,7 +603,6 @@
 
   function putFlowResponse(fromRadioCheck) {
     getFlows();
-
     if (!fromRadioCheck) {
       $('#flow_form').toggle();
     }
