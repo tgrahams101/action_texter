@@ -20,7 +20,7 @@ class ANTexterMethods {
           "from" => get_field( 'twilio_from_number', 'user_'. get_current_user_id()),
           "apiKey" => get_field('action_texts_api_key', 'user_'. get_current_user_id())
       );
-      $response = wp_remote_post($SMS_CAUCUS_URL . 'send-test-text', array( "body" => $postData));
+      $response = wp_remote_post($this->SMS_CAUCUS_URL . 'send-test-text', array( "body" => $postData));
 
       if ( is_wp_error( $response ) ) {
           $error_message = $response->get_error_message();
@@ -33,7 +33,7 @@ class ANTexterMethods {
 
   public function fetch_forms() {
     $api_key = get_field( 'action_network_api_key', 'user_'. get_current_user_id());
-    $response = wp_remote_get($FORMS_URL, array(
+    $response = wp_remote_get($this->FORMS_URL, array(
                 'headers' => array('OSDI-API-Token' => $api_key)
                 ));
 
@@ -48,7 +48,7 @@ class ANTexterMethods {
 
   public function get_flows() {
     $api_key = get_field('action_texts_api_key', 'user_'. get_current_user_id());
-    $response = wp_remote_get($SMS_CAUCUS_URL . 'sms-flow/' . $api_key);
+    $response = wp_remote_get($this->SMS_CAUCUS_URL . 'sms-flow/' . $api_key);
 
     if (is_wp_error( $response ) ) {
       $error_message = $response->get_error_message();
@@ -82,7 +82,7 @@ class ANTexterMethods {
       )
     );
 
-    $response = wp_remote_post($SMS_CAUCUS_URL . 'sms-flow/' . $api_key, array(
+    $response = wp_remote_post($this->SMS_CAUCUS_URL . 'sms-flow/' . $api_key, array(
       'headers'   => array('Content-Type' => 'application/json; charset=utf-8'),
       'body'      => $post_body,
       'method'    => 'POST'
@@ -101,7 +101,7 @@ class ANTexterMethods {
     $api_key = get_field('action_texts_api_key', 'user_'. get_current_user_id());
     $put_body = stripslashes($_POST['body']);
 
-    $response = wp_remote_post($SMS_CAUCUS_URL . 'sms-flow/' . $api_key, array(
+    $response = wp_remote_post($this->SMS_CAUCUS_URL . 'sms-flow/' . $api_key, array(
       'headers'   => array('Content-Type' => 'application/json; charset=utf-8'),
       'body'      => $put_body,
       'method'    => 'PUT'
@@ -127,7 +127,7 @@ class ANTexterMethods {
         "apiKey" => get_field('action_texts_api_key', 'user_'. get_current_user_id())
     );
 
-    $response = wp_remote_post($SMS_CAUCUS_URL . 'bulk-send', array( "body" => $postData));
+    $response = wp_remote_post($this->SMS_CAUCUS_URL . 'bulk-send', array( "body" => $postData));
 
     if ( is_wp_error( $response ) ) {
         $error_message = $response->get_error_message();
@@ -140,7 +140,7 @@ class ANTexterMethods {
 
   public function fetch_batches() {
     $api_key = get_field( 'action_texts_api_key', 'user_'. get_current_user_id() );
-    $response =   $response = wp_remote_get($SMS_CAUCUS_URL . 'check-all-stats?apiKey=' . $api_key );
+    $response =   $response = wp_remote_get($this->SMS_CAUCUS_URL . 'check-all-stats?apiKey=' . $api_key );
 
     if (is_wp_error( $response ) ) {
       $error_message = $response->get_error_message();
@@ -152,8 +152,9 @@ class ANTexterMethods {
   }
 
   public function fetch_tags() {
+    error_log('INSIDE FETCH TAGS');
     $api_key = get_field( 'action_network_api_key', 'user_'. get_current_user_id());
-    $response = wp_remote_get($AN_URL . 'tags/', array(
+    $response = wp_remote_get($this->AN_URL . 'tags/', array(
               'headers' => array('OSDI-API-Token' => $api_key)
                  )
                 );
@@ -168,7 +169,7 @@ class ANTexterMethods {
   }
 
   public function check_progress() {
-    $response = wp_remote_get($SMS_CAUCUS_URL . 'check-stats?pid=' . $_GET['pid'] . '&apiKey=' . get_field( 'action_texts_api_key', 'user_'. get_current_user_id()) );
+    $response = wp_remote_get($this->SMS_CAUCUS_URL . 'check-stats?pid=' . $_GET['pid'] . '&apiKey=' . get_field( 'action_texts_api_key', 'user_'. get_current_user_id()) );
 
     if ( is_wp_error( $response ) ) {
         $error_message = $response->get_error_message();
