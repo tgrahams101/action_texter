@@ -602,7 +602,6 @@
   }
 
   function putFlowResponse(fromRadioCheck) {
-    getFlows();
     if (!fromRadioCheck) {
       $('#flow_form').toggle();
     }
